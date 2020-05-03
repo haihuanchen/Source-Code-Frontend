@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MainContainer from './Container/MainContainer';
+import MainContainer from './Containers/MainContainer';
 // import Login from './Container/UserLogin';
 // import NavBar from './Container/Components/NavBar';
 // import { Route, Switch } from 'react-router-dom';
