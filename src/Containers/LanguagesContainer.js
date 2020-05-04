@@ -15,7 +15,7 @@ class LanguagesContainer extends React.Component{
                 </label>
                 {this.props.languages.map(language => {
                     return <div>
-                             <h1 value={language.id} onClick={(e)=>this.props.filterPosts(e.target.value)}> {language.title}</h1>
+                             <h1 value={language.id} > {language.title}</h1>
                             <p> {language.description}</p>
                             <p>More Resourses: {language.resources}</p>
                             {/* key={language.id} */}

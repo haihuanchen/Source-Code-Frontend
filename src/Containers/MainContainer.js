@@ -31,17 +31,17 @@ class MainContainer extends React.Component{
     handleLanguage = (e)=>{
         // let lan = this.state.languageIndex.find(language => language.title === e.target.textContent)
         // console.log(lan)
-        // this.setState({ targetedLanguage: e.target.value})
+        this.setState({ targetedLanguage: e.target.value})
     }
 
-    filterPosts = (languageId)=>{
-        let newPosts =this.state.posts.filter(post => post['language_id'] === languageId)
-        this.setState({targetedposts: newPosts})
-
-    }
+    // filterPosts = (languageId)=>{
+    //     let newPosts =this.state.posts.filter(post => post['language_id'] === languageId)
+    //     this.setState({targetedposts: newPosts})
+    // }
     
     render(){
-        console.log("test1", this.state.targetedLanguage)
+        let selectedlanguage = this.state.languageIndex.find(language => language.id == parseInt(this.state.targetedLanguage))
+        console.log("test1", selectedlanguage)
         return(
             <div>
                 <h1> Source Code </h1>
