@@ -8,7 +8,7 @@ class MainContainer extends React.Component{
     state = {
         languageIndex: [],
         postIndex: [],
-        targetedLanguage: '' //language 
+        targetedposts: [] //posts 
     }
     componentDidMount(){
         fetch(LANGUAGESAPI)
@@ -26,22 +26,24 @@ class MainContainer extends React.Component{
             })
         })
     }
-
-    handleLanguage = (e)=>{
-        // let lan = this.state.languageIndex.find(language => language.title === e.target.textContent)
-        // console.log(lan)
-        this.setState({ targetedLanguage: e.target.textContent})
-    }
     
+    filterPosts = (languageId)=>{
+        let newPosts = this.state.postIndex.filter(post => post['language_id'] === languageId)
+        // console.log(newPosts)
+        this.setState({targetedposts: newPosts})
+    }
+
+
     render(){
-        let selectedlanguage = this.state.languageIndex.find(language => language.title == this.state.targetedLanguage)
-        console.log("test1", selectedlanguage)
-        // console.log("test2", typeof(this.state.targetedLanguage))
+        // console.log("test1", this.state.targetedLanguage)
         return(
             <div>
                 <h1> Source Code </h1>
-                <LanguagesContainer languages={this.state.languageIndex} handleLanguage={this.handleLanguage}/>
-                <PostContainer posts={this.state.postIndex}/>
+                <LanguagesContainer 
+                    languages={this.state.languageIndex} 
+                    filterPosts={this.filterPosts}
+                />
+                <PostContainer posts={this.state.targetedposts ? this.state.targetedposts : null}/>
             </div>
         )
     }
