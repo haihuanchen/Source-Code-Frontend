@@ -38,7 +38,7 @@ class MainContainer extends React.Component{
         // console.log("test1", this.state.targetedLanguage)
         return(
             <div>
-                <h1> Source Code </h1>
+                <h1> Welcome to Source Code </h1>
                 <LanguagesContainer 
                     languages={this.state.languageIndex} 
                     filterPosts={this.filterPosts}

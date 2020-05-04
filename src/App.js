@@ -4,16 +4,31 @@ import MainContainer from './Containers/MainContainer';
 import CreateAccount from './Components/CreateAccount';
 import NavBar from './Components/NavBar';
 // import { Route, Switch } from 'react-router-dom';
-function App() {
-  return (
+export default class App extends React.Component{
+  state = {
+    userIndex: []
+  }
+  componentDidMount(){
+    fetch('http://localhost:3000/users')
+    .then(res=>res.json())
+    .then(data=> this.setState({userIndex: data}))
+  }
+
+  createUser = (newUser)=>{
+    this.setState({userIndex: [...this.state.userIndex, newUser]})
+  }
+
+  render(){
+    console.log(this.state.userIndex)
+    return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={"https://secure.i.telegraph.co.uk/multimedia/archive/02837/internet_2837932b.jpg"} className="App-logo" alt="logo" /> */}
         <NavBar/>
-        <CreateAccount />
+        <CreateAccount createUser={this.createUser}/>
         <MainContainer/>
       </header>
     </div>
   );
+
+    }
 }
-export default App;

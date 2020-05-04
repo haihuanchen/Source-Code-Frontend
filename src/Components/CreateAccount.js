@@ -18,22 +18,24 @@ export default class CreateAccount extends React.Component{
     handleSubmit = (e)=>{
         e.preventDefault();
         console.log(this.state)
-        let {password, confirmation} = this.state;
+        let {name, username, password, confirmation, email} = this.state;
         
         if(password === confirmation){
             fetch('http://localhost:3000/users',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Accept":  'application/json'
+                    Accept:  'application/json'
                 },
                 body: JSON.stringify({
-                    name: this.state.name, 
-                    username: this.state.username, 
-                    password: this.state.password, 
-                    email: this.state.email
+                    name: name, 
+                    username: username, 
+                    email: email,
+                    password: password, 
                 })
             })
+            .then(res=>res.json())
+            .then(data=> this.props.createUser(data))
             this.setState({name: '', username: '', password: '', confirmation: '', email: ''})
         }
         else{
