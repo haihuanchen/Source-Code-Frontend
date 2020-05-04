@@ -1,26 +1,31 @@
 import React, { Fragment } from 'react'
-import PostContainer from './PostContainer.js'
+
 class LanguagesContainer extends React.Component{
-    
+    // state = {
+    //     toggled: false,
+    //     targetedLang: ''
+    // }
+
+    // handleChange = (e)=>{
+    //     this.setState({toggled: !this.state.toggled, targetedLang: e.target.value})
+    // }
     render(){
-        // console.log("test2", this.props.languages)
+        // console.log("test2", this.state.targetedLang)
         return(
             <Fragment>
                 <label>
                 Pick your language:
-                <select onChange={this.props.handleLanguage}>
-                    <option value="JavaScript">JavaScript</option>
+                <select>
+                    <option value="JavaScript" >JavaScript</option>
                     <option value="Ruby">Ruby</option>
                 </select>
                 </label>
                 {this.props.languages.map(language => {
-                    return <div>
-                             <h1 value={language.id} > {language.title}</h1>
+                    return <Fragment key={language.id}>
+                            <h1 value={language.id} onClick={()=>this.props.filterPosts(language.id)}> {language.title}</h1><br/>
                             <p> {language.description}</p>
                             <p>More Resourses: {language.resources}</p>
-                            {/* key={language.id} */}
-                            {/* <PostContainer posts={language.posts} /> */}
-                        </div>
+                        </Fragment>
                 })}
             </Fragment>
         )

@@ -15,13 +15,17 @@
 
 .App-header {
   background-color: #282c34;
+  background-image: url('https://secure.i.telegraph.co.uk/multimedia/archive/02837/internet_2837932b.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: peachpuff;
 }
 
 .App-link {
