@@ -1,14 +1,13 @@
 import React from "react";
 
 const LanguageDetails = props => {
-  console.log("test", props)
+  // console.log("test", props)
   return (
     <div className="ui center aligned header sixteen wide column">
       <h1>{props.language.title}</h1>
       <p>{props.language.description}</p>
-      {/* <p>{props.course.resources}</p> */}
-      {/* {come back to this } */}
-      <button onClick={() => props.filterPosts(props.language.id)}> See Aritcles</button>
+      <a href={props.language.resources}> {props.language.resources ? "More Resources" : null}</a><br/>
+      <button onClick={() => props.filterPosts(props.language.id)}> See Articles</button>
 
     </div>
   );

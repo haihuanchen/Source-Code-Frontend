@@ -8,12 +8,14 @@ import { Route, Switch } from 'react-router-dom';
 const LANGUAGESAPI  = "http://localhost:3000/languages"
 const POSTAPI = "http://localhost:3000/posts"
 const UserAPI = 'http://localhost:3000/users'
+
 export default class App extends React.Component{
   state = {
     userIndex: [],
     languageIndex: [],
     postIndex: [],
-    targetedposts: []
+    targetedposts: [],
+    targetedLanguage: null
   }
 
   componentDidMount(){
@@ -39,6 +41,12 @@ export default class App extends React.Component{
     this.setState({userIndex: [...this.state.userIndex, newUser]})
   }
 
+  handleLangChange = (event) => {
+    this.setState({
+        targetedLanguage: event.target.value
+    })
+}
+
   render(){
     const {languageIndex, targetedposts} = this.state
     return (
@@ -47,7 +55,15 @@ export default class App extends React.Component{
         <h1> Welcome to Source Code </h1>
         <NavBar/>
         <Switch>
-          <Route exact path="/home" render={()=> <MainContainer filterPosts={this.filterPosts} languages={languageIndex} posts={targetedposts ? targetedposts : null}/>} />
+          <Route exact path="/home" render={()=> 
+            <MainContainer 
+              filterPosts={this.filterPosts} 
+              languages={languageIndex} 
+              posts={targetedposts ? targetedposts : null} 
+              handleLangChange={this.handleLangChange}
+              targetedLanguage={this.state.targetedLanguage}
+            />} 
+          />
           <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} />} />
           <Route path='/home/easteregg' render={()=> <div>Easter Egg <span role='img' aria-label='egg'>🥚</span></div>}/>
         </Switch>

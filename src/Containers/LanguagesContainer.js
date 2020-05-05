@@ -4,7 +4,7 @@ const LanguagesContainer = props => {
   return (
     <div >
       <select
-        onChange={(event) => props.handleChange(event)}
+        onChange={(event) => props.handleLangChange(event)}
         defaultValue="select">
         <option value="select" disabled>
           Select a Language
