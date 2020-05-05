@@ -3,15 +3,36 @@ import './App.css';
 import MainContainer from './Containers/MainContainer';
 import CreateAccount from './Components/CreateAccount';
 import NavBar from './Components/NavBar';
-// import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
+const LANGUAGESAPI  = "http://localhost:3000/languages"
+const POSTAPI = "http://localhost:3000/posts"
+const UserAPI = 'http://localhost:3000/users'
 export default class App extends React.Component{
   state = {
-    userIndex: []
+    userIndex: [],
+    languageIndex: [],
+    postIndex: [],
+    targetedposts: []
   }
+
   componentDidMount(){
-    fetch('http://localhost:3000/users')
+    fetch(UserAPI)
     .then(res=>res.json())
     .then(data=> this.setState({userIndex: data}))
+
+    fetch(LANGUAGESAPI)
+        .then(resp => resp.json())
+        .then(data => this.setState({languageIndex: data}))
+
+    fetch(POSTAPI)
+    .then(resp => resp.json())
+    .then(data => this.setState({postIndex: data}))
+  }
+
+  filterPosts = (languageId)=>{
+    let newPosts = this.state.postIndex.filter(post => post['language_id'] === languageId)
+    this.setState({targetedposts: newPosts})
   }
 
   createUser = (newUser)=>{
@@ -19,13 +40,23 @@ export default class App extends React.Component{
   }
 
   render(){
-    console.log(this.state.userIndex)
+    const {languageIndex, targetedposts} = this.state
     return (
     <div className="App">
       <header className="App-header">
+        <h1> Welcome to Source Code </h1>
         <NavBar/>
-        <CreateAccount createUser={this.createUser}/>
-        <MainContainer/>
+        <Switch>
+          <Route exact path="/home" render={()=> <MainContainer filterPosts={this.filterPosts} languages={languageIndex} posts={targetedposts ? targetedposts : null}/>} />
+          <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} />} />
+          <Route path='/home/easteregg' render={()=> <div>Easter Egg <span role='img' aria-label='egg'>🥚</span></div>}/>
+        </Switch>
+        {/* <CreateAccount createUser={this.createUser}/>
+        <MainContainer 
+          filterPosts={this.filterPosts}
+          languages={languageIndex}
+          posts={targetedposts ? targetedposts : null}
+        /> */}
       </header>
     </div>
   );
