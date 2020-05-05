@@ -1,6 +1,7 @@
 import React from 'react'
+import { withRouter } from "react-router-dom";
 
-export default class CreateAccount extends React.Component{
+class CreateAccount extends React.Component{
     state = {
         name: '',
         username: '',
@@ -10,16 +11,14 @@ export default class CreateAccount extends React.Component{
     }
 
     handleChange = (e)=>{
-        console.log([e.target.name], e.target.value)
+        // console.log([e.target.name], e.target.value)
         this.setState({ [e.target.name]: e.target.value})
-        
     }
 
     handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(this.state)
+        // console.log(this.state)
         let {name, username, password, confirmation, email} = this.state;
-        
         if(password === confirmation){
             fetch('http://localhost:3000/users',{
                 method: 'POST',
@@ -37,6 +36,7 @@ export default class CreateAccount extends React.Component{
             .then(res=>res.json())
             .then(data=> this.props.createUser(data))
             this.setState({name: '', username: '', password: '', confirmation: '', email: ''})
+            this.props.history.push('/home')
         }
         else{
             alert('Password and Confirmation do not Match!')
@@ -44,6 +44,7 @@ export default class CreateAccount extends React.Component{
     }
 
     render(){
+        // console.log("create account", this.props)
         return(
             <form onSubmit={this.handleSubmit}>
                 <h1>Create Account</h1>
@@ -72,3 +73,5 @@ export default class CreateAccount extends React.Component{
         )
     }
 }
+
+export default withRouter(CreateAccount) 
