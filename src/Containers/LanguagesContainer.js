@@ -24,7 +24,7 @@ class LanguagesContainer extends React.Component{
                     return <Fragment key={language.id}>
                             <h1 value={language.id} onClick={()=>this.props.filterPosts(language.id)}> {language.title}</h1><br/>
                             <p> {language.description}</p>
-                            <p>More Resourses: {language.resources}</p>
+                            <a href={language.resources}>More Resourses</a>
                         </Fragment>
                 })}
             </Fragment>
