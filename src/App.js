@@ -15,7 +15,8 @@ export default class App extends React.Component{
     languageIndex: [],
     postIndex: [],
     targetedposts: [],
-    targetedLanguage: null
+    targetedLanguage: null,
+    search: ''
   }
 
   componentDidMount(){
@@ -42,37 +43,36 @@ export default class App extends React.Component{
   }
 
   handleLangChange = (event) => {
-    this.setState({
-        targetedLanguage: event.target.value
-    })
-}
+    this.setState({targetedLanguage: event.target.value})
+  }
+
+  handleSearchChange = (e)=>{
+    this.setState({search: e.target.value})
+  }
 
   render(){
-    const {languageIndex, targetedposts} = this.state
+    const {languageIndex, targetedposts, targetedLanguage, search} = this.state
+    let searchArticles = targetedposts.filter(post=> post.title.toLowerCase().includes(search.toLowerCase()))
+
     return (
     <div className="App">
       <header className="App-header">
         <h1> Welcome to Source Code </h1>
-        <NavBar/>
+        <NavBar search={search} handleSearchChange={this.handleSearchChange}/>
         <Switch>
           <Route exact path="/home" render={()=> 
             <MainContainer 
               filterPosts={this.filterPosts} 
               languages={languageIndex} 
               posts={targetedposts ? targetedposts : null} 
+              searchArticles={searchArticles}
               handleLangChange={this.handleLangChange}
-              targetedLanguage={this.state.targetedLanguage}
+              targetedLanguage={targetedLanguage}
             />} 
           />
           <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} />} />
           <Route path='/home/easteregg' render={()=> <div>Easter Egg <span role='img' aria-label='egg'>🥚</span></div>}/>
         </Switch>
-        {/* <CreateAccount createUser={this.createUser}/>
-        <MainContainer 
-          filterPosts={this.filterPosts}
-          languages={languageIndex}
-          posts={targetedposts ? targetedposts : null}
-        /> */}
       </header>
     </div>
   );
