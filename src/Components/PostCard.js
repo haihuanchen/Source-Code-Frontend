@@ -5,6 +5,7 @@ const PostCard = (props)=>{
         <Fragment>
             <h3>Title: {props.post.title}</h3>
             <p>{props.post.content}</p>
+            
         </Fragment>
 
     )
