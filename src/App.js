@@ -43,7 +43,7 @@ export default class App extends React.Component{
   }
 
   handleLangChange = (event) => {
-    this.setState({targetedLanguage: event.target.value})
+    this.setState({targetedLanguage: event.target.value, targetedposts: []})
   }
 
   handleSearchChange = (e)=>{
