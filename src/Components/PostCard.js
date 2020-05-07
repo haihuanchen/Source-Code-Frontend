@@ -14,14 +14,10 @@ const PostCard = (props)=>{
         .then(delPost=> props.deletePost(delPost.id))
     }
 
-    const handleEdit = () => {
-
-    }
-
     return(
         <Fragment>
             <h3>Title: {props.post.title}</h3>
-            <button onClick={() => handleEdit()}> Edit</button>
+            <button onClick={() => props.handleEdit(props.post)}> Edit</button>
             <button onClick={() => handleDel(props.post.id)}> Delete</button>
             <p>{props.post.content}</p>
         </Fragment>
