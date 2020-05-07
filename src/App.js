@@ -4,13 +4,13 @@ import MainContainer from './Containers/MainContainer';
 import CreateAccount from './Components/CreateAccount';
 import NavBar from './Components/NavBar';
 import PostForm from './Components/PostForm'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 const LANGUAGESAPI  = "http://localhost:3000/languages"
 const POSTAPI = "http://localhost:3000/posts"
 const UserAPI = 'http://localhost:3000/users'
 
-export default class App extends React.Component{
+class App extends React.Component{
   state = {
     userIndex: [],
     languageIndex: [],
@@ -24,7 +24,8 @@ export default class App extends React.Component{
       username: "quinn",
       email: "samchen@123.com",
       password: "123"
-    }
+    },
+    currentPost: {}
   }
 
   componentDidMount(){
@@ -59,7 +60,7 @@ export default class App extends React.Component{
   }
 
   createPost = (newPost) => {
-    this.setState({postIndex: [...this.state.postIndex, newPost]})
+    this.setState({postIndex: [...this.state.postIndex, newPost], targetedposts: [...this.state.targetedposts, newPost]})
   }
 
   deletePost = (postId) => {
@@ -68,10 +69,21 @@ export default class App extends React.Component{
     this.setState({postIndex: remainPosts, targetedposts: remainTarget})
   }
 
+  handleEdit = (post) => {
+       this.setState({ currentPost: post})
+       this.props.history.push('/postform')
+  }
+
+  updatePost = (editPost) => {
+    let editedPosts = this.state.postIndex.map(post => post.id === editPost.id ? editPost : post)
+    let editedPost = this.state.targetedposts.map(post => post.id === editPost.id ? editPost : post)
+    this.setState({postIndex: editedPosts, targetedposts: editedPost, currentPost: {}})
+  }
+
   render(){
-    const {languageIndex, targetedposts, targetedLanguage, search, currentUser} = this.state
+    const {languageIndex, targetedposts, targetedLanguage, search, currentUser, currentPost} = this.state
     let searchArticles = targetedposts.filter(post=> post.title.toLowerCase().includes(search.toLowerCase()))
-    // console.log(this.state.currentUser)
+    // console.log(this.state.currentPost)
     return (
       <div className="App">
         <header className="App-header">
@@ -87,10 +99,11 @@ export default class App extends React.Component{
                 handleLangChange={this.handleLangChange}
                 targetedLanguage={targetedLanguage}
                 deletePost={this.deletePost}
+                handleEdit={this.handleEdit}
               />} 
             />
             <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} {...this.props} />} />
-            <Route path='/postform'  render={currentUser && targetedLanguage ? ()=> <PostForm createPost={this.createPost} userId={currentUser.id} langId={targetedLanguage}/> : null} />
+            <Route path='/postform'  render={currentUser && targetedLanguage ? ()=> <PostForm createPost={this.createPost} userId={currentUser.id} langId={targetedLanguage} currentPost={currentPost} updatePost={this.updatePost}/> : null} />
           </Switch>
         </header>
       </div>
@@ -98,3 +111,5 @@ export default class App extends React.Component{
 
   }
 }
+
+export default withRouter(App)
