@@ -14,7 +14,7 @@ class MainContainer extends React.Component{
                     handleLangChange={handleLangChange}
                 />
                 <LanguageDetails language={target} filterPosts={filterPosts}/> 
-                <PostContainer posts={searchArticles? searchArticles : posts}/>
+                <PostContainer posts={searchArticles? searchArticles : posts} deletePost={this.props.deletePost}/>
             </div>
         )
     }
