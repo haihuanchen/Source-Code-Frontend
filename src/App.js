@@ -3,6 +3,7 @@ import './App.css';
 import MainContainer from './Containers/MainContainer';
 import CreateAccount from './Components/CreateAccount';
 import NavBar from './Components/NavBar';
+import PostForm from './Components/PostForm'
 import { Route, Switch } from 'react-router-dom';
 
 const LANGUAGESAPI  = "http://localhost:3000/languages"
@@ -15,9 +16,15 @@ export default class App extends React.Component{
     languageIndex: [],
     postIndex: [],
     targetedposts: [],
-    targetedLanguage: null,
+    targetedLanguage: null, //language id
     search: '',
-    currentUser: {}
+    currentUser: {
+      id: 29,
+      name: "SamTheMan",
+      username: "quinn",
+      email: "samchen@123.com",
+      password: "123"
+    }
   }
 
   componentDidMount(){
@@ -47,36 +54,47 @@ export default class App extends React.Component{
     this.setState({targetedLanguage: event.target.value, targetedposts: []})
   }
 
-  handleSearchChange = (e)=>{
+  handleSearchChange = (e) => {
     this.setState({search: e.target.value})
   }
 
+  createPost = (newPost) => {
+    this.setState({postIndex: [...this.state.postIndex, newPost]})
+  }
+
+  deletePost = (postId) => {
+    let remainPosts = this.state.postIndex.filter(post => post.id !== postId)
+    let remainTarget = this.state.targetedposts.filter(post => post.id !== postId)
+    this.setState({postIndex: remainPosts, targetedposts: remainTarget})
+  }
+
   render(){
-    const {languageIndex, targetedposts, targetedLanguage, search} = this.state
+    const {languageIndex, targetedposts, targetedLanguage, search, currentUser} = this.state
     let searchArticles = targetedposts.filter(post=> post.title.toLowerCase().includes(search.toLowerCase()))
-
+    // console.log(this.state.currentUser)
     return (
-    <div className="App">
-      <header className="App-header">
-    <h1> Welcome to Source Code {this.state.currentUser.name}</h1>
-        <NavBar search={search} handleSearchChange={this.handleSearchChange}/>
-        <Switch>
-          <Route exact path="/home" render={()=> 
-            <MainContainer 
-              filterPosts={this.filterPosts} 
-              languages={languageIndex} 
-              posts={targetedposts ? targetedposts : null} 
-              searchArticles={searchArticles}
-              handleLangChange={this.handleLangChange}
-              targetedLanguage={targetedLanguage}
-            />} 
-          />
-          <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} {...this.props} />} />
-          <Route path='/home/easteregg' render={()=> <div>Easter Egg <span role='img' aria-label='egg'>🥚</span></div>}/>
-        </Switch>
-      </header>
-    </div>
-  );
+      <div className="App">
+        <header className="App-header">
+      <h1> Welcome to Source Code {this.state.currentUser.name}</h1>
+          <NavBar search={search} handleSearchChange={this.handleSearchChange} currentUser={currentUser}/>
+          <Switch>
+            <Route exact path="/home" render={()=> 
+              <MainContainer 
+                filterPosts={this.filterPosts} 
+                languages={languageIndex} 
+                posts={targetedposts ? targetedposts : null} 
+                searchArticles={searchArticles}
+                handleLangChange={this.handleLangChange}
+                targetedLanguage={targetedLanguage}
+                deletePost={this.deletePost}
+              />} 
+            />
+            <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} {...this.props} />} />
+            <Route path='/postform'  render={currentUser && targetedLanguage ? ()=> <PostForm createPost={this.createPost} userId={currentUser.id} langId={targetedLanguage}/> : null} />
+          </Switch>
+        </header>
+      </div>
+    )
 
-    }
+  }
 }
