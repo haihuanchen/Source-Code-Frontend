@@ -52,22 +52,28 @@ class PostForm extends React.Component{
             this.props.history.push('/home')
         }
     }
-    
+
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
                 <h1>{this.props.currentPost.title? "Edit this Post" : "Create New Post"}</h1>
                 <label>
                     Title:
+                    <br/>
                     <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/>
                 </label>
+                <br/>
+                <br/>
                 <label>
                     Content:
-                    <input name="content" type="text-area" value={this.state.content} onChange={this.handleChange}/>
+                    <br/>
+                    <textarea id="content-area" name="content" value={this.state.content} onChange={this.handleChange}/>
                 </label>
-                <input type="submit"/>   
+                <br/>
+                <br/>
+                <input type="submit" value="Submit"/>
             </form>
-            
+
         )
     }
 }

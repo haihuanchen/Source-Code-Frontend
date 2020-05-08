@@ -87,25 +87,34 @@ class App extends React.Component{
     return (
       <div className="App">
         <header className="App-header">
-      <h1> Welcome to Source Code {this.state.currentUser.name}</h1>
+
           <NavBar search={search} handleSearchChange={this.handleSearchChange} currentUser={currentUser}/>
+
+          <h1> Welcome to Source Code {this.state.currentUser.name}</h1>
+
           <Switch>
-            <Route exact path="/home" render={()=> 
-              <MainContainer 
-                filterPosts={this.filterPosts} 
-                languages={languageIndex} 
-                posts={targetedposts ? targetedposts : null} 
+
+            <Route exact path="/home" render={()=>
+              <MainContainer
+                filterPosts={this.filterPosts}
+                languages={languageIndex}
+                posts={targetedposts ? targetedposts : null}
                 searchArticles={searchArticles}
                 handleLangChange={this.handleLangChange}
                 targetedLanguage={targetedLanguage}
                 deletePost={this.deletePost}
                 handleEdit={this.handleEdit}
-              />} 
+              />}
             />
+
             <Route path='/signup' render={()=> <CreateAccount createUser={this.createUser} {...this.props} />} />
+
             <Route path='/postform'  render={currentUser && targetedLanguage ? ()=> <PostForm createPost={this.createPost} userId={currentUser.id} langId={targetedLanguage} currentPost={currentPost} updatePost={this.updatePost}/> : null} />
+
           </Switch>
+
         </header>
+
       </div>
     )
 

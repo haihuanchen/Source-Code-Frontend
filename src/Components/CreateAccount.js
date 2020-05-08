@@ -27,10 +27,10 @@ class CreateAccount extends React.Component{
                     Accept:  'application/json'
                 },
                 body: JSON.stringify({
-                    name: name, 
-                    username: username, 
+                    name: name,
+                    username: username,
                     email: email,
-                    password: password, 
+                    password: password,
                 })
             })
             .then(res=>res.json())
@@ -46,32 +46,42 @@ class CreateAccount extends React.Component{
     render(){
         // console.log("create account", this.props)
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form id="account-create" onSubmit={this.handleSubmit}>
                 <h1>Create Account</h1>
                 <label>
                     Name:
                     <input name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
                 </label>
+                <br/>
+                <br/>
                 <label>
                     Username:
                     <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
                 </label>
+                <br/>
+                <br/>
                 <label>
                     Password:
                     <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
                 </label>
+                <br/>
+                <br/>
                 <label>
                     Confirm Password:
                     <input name="confirmation" type="password" value={this.state.confirmation} onChange={this.handleChange}/>
                 </label>
+                <br/>
+                <br/>
                 <label>
                     Email:
                     <input name="email" type="text" value={this.state.email} onChange={this.handleChange}/>
                 </label>
-                <input type="submit" />
+                <br/>
+                <br/>
+                <input type="submit" value="Submit" />
             </form>
         )
     }
 }
 
-export default withRouter(CreateAccount) 
+export default withRouter(CreateAccount)

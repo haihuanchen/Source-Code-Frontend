@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const POSTAPI = "http://localhost:3000/posts"
 
@@ -15,12 +15,12 @@ const PostCard = (props)=>{
     }
 
     return(
-        <Fragment>
+        <div className="post">
             <h3>Title: {props.post.title}</h3>
             <button onClick={() => props.handleEdit(props.post)}> Edit</button>
             <button onClick={() => handleDel(props.post.id)}> Delete</button>
             <p>{props.post.content}</p>
-        </Fragment>
+        </div>
 
     )
 }
