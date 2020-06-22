@@ -11,7 +11,9 @@ You have a <Linux/Mac> machine.Windows OS is currently not supported.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 -Developed Rails API backend with PostGreSQL database to retrieve programming languages and articles
+
 -Implemented user interface with React frontend to view programming languages articles
+
 -Employed user interface and allow users to post new programming languages articles 
 
 
