@@ -8,7 +8,7 @@ Before you begin, ensure you have met the following requirements:
 
 You have installed the latest version of Ruby on Rails as back end & React JavaScript as Front End.
 You have a <Linux/Mac> machine.Windows OS is currently not supported.
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). To start the app, use terminal command "npm start".
 
 -Developed Rails API backend with PostGreSQL database to retrieve programming languages and articles
 
