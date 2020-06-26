@@ -2,6 +2,8 @@ Source Code Front End
 
 A social application for users to learn and post articles about programming languages tips and lessons
 
+Video Demo of this project: https://www.loom.com/share/4f637a11c70544aeaf53c8ae4124b902
+
 Prerequisites
 
 Before you begin, ensure you have met the following requirements:
