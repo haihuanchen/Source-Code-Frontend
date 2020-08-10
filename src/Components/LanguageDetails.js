@@ -1,7 +1,6 @@
 import React from "react";
 
 const LanguageDetails = props => {
-  // console.log("test", props)
   return (
     <div className="ui center aligned header sixteen wide column">
       <h1>{props.language.title}</h1>
@@ -17,7 +16,7 @@ const LanguageDetails = props => {
 // CourseDetails will still get a course, but it will be an empty object.
 LanguageDetails.defaultProps = {
   language: {
-    title: "Select a Language to learn more ."
+    title: "Select a Language to learn more."
   }
 };
 

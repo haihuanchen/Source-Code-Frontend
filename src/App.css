@@ -24,7 +24,6 @@
   top: 0;
   left: 0;
   width: 100vw;
-  /* background-color: green; */
 }
 
 .post {
@@ -50,7 +49,7 @@
 
 a {
   color: peachpuff;
-  text-decoration: overline;
+  text-decoration: underline;
 }
 
 a:hover {

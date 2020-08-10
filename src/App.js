@@ -18,13 +18,7 @@ class App extends React.Component{
     targetedposts: [],
     targetedLanguage: null, //language id
     search: '',
-    currentUser: {
-      id: 29,
-      name: "SamTheMan",
-      username: "quinn",
-      email: "samchen@123.com",
-      password: "123"
-    },
+    currentUser: {},
     currentPost: {}
   }
 
@@ -83,7 +77,6 @@ class App extends React.Component{
   render(){
     const {languageIndex, targetedposts, targetedLanguage, search, currentUser, currentPost} = this.state
     let searchArticles = targetedposts.filter(post=> post.title.toLowerCase().includes(search.toLowerCase()))
-    // console.log(this.state.currentPost)
     return (
       <div className="App">
         <header className="App-header">
