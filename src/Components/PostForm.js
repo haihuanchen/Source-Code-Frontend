@@ -15,7 +15,6 @@ class PostForm extends React.Component{
         event.preventDefault();
         let {title, content} = this.state;
         let {langId, userId} = this.props;
-        // console.log(this.state)
         if(this.props.currentPost.title){
             fetch(`http://localhost:3000/posts/${this.props.currentPost.id}`,{
                 method: 'PATCH',

@@ -11,13 +11,11 @@ class CreateAccount extends React.Component{
     }
 
     handleChange = (e)=>{
-        // console.log([e.target.name], e.target.value)
         this.setState({ [e.target.name]: e.target.value})
     }
 
     handleSubmit = (e)=>{
         e.preventDefault();
-        // console.log(this.state)
         let {name, username, password, confirmation, email} = this.state;
         if(password === confirmation){
             fetch('http://localhost:3000/users',{
@@ -44,7 +42,6 @@ class CreateAccount extends React.Component{
     }
 
     render(){
-        // console.log("create account", this.props)
         return(
             <form id="account-create" onSubmit={this.handleSubmit}>
                 <h1>Create Account</h1>
